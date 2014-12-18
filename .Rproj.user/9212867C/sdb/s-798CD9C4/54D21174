@@ -1,0 +1,17 @@
+{
+    "contents" : "#===========================Simulation==========================================\n# Simulate the sum of 40 random exponentials with lambda=0.2, 1000 times\n#This uses a for loop, could do it with apply faster but I don't have time to learn that right now\n\n    set.seed(59)    #Make this reproducible by setting the starting point\n    \n    N<-10000\n    \n    sums<-c()\n    \n    for (i in 1:N) {\n        p<-rpois(40, lambda=.2)\n        sums[i]<-sum(p)\n    }\n\n#==========================Question 1===========================================\n\n    hist(sums)\n",
+    "created" : 1418905899290.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1355061401",
+    "id" : "54D21174",
+    "lastKnownWriteTime" : 1418906369,
+    "path" : "~/Coursera Data Science Specialization/Statistical Inference/CourseProject/Workingfile.R",
+    "project_path" : "Workingfile.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
