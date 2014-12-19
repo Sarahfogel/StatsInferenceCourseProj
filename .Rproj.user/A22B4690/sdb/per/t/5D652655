@@ -1,0 +1,17 @@
+{
+    "contents" : "#========================Load data==============================================\nlibrary(datasets)\ndata(ToothGrowth)\n\n#=======================Question 1==============================================\n#Load the ToothGrowth data and perform some basic exploratory data analyses \ndim(ToothGrowth)\nstr(ToothGrowth)\nhead(ToothGrowth)\nsummary(ToothGrowth)\n\n\npar(mfrow=c(1,2))\nhist(ToothGrowth$len)\nhist(ToothGrowth$dose)\ntable(ToothGrowth$supp)\npar(mfrow=c(1,1))\n\nlibrary(lattice)\nbwplot(ToothGrowth$len~ToothGrowth$supp)\nbwplot(ToothGrowth$len~as.factor(ToothGrowth$dose))\n\n\n.#=========================Question 2=============================================\n#Provide a basic summary of the data.\n\n#This data set shows the length of teeth in each of 10 guinea pigs at each of \n#  three dose levels of Vitamin C with each of two delivery methods.\n\nsummary(ToothGrowth)\n\n#=============================Question 3========================================\n#Use confidence intervals and/or hypothesis tests to compare tooth growth by supp\n#and dose. (Only use the techniques from class, even if there's other approaches \n#worth considering)\n\nTooth.split.supp<-split(ToothGrowth$len, f=list(ToothGrowth$supp))\nTooth.split.dose<-split(ToothGrowth$len, f=list(ToothGrowth$dose))\nTooth.split.both<-split(ToothGrowth$len, f=list(ToothGrowth$supp, ToothGrowth$dose))\n\n#Since it is unclear which guinea pig is which in this data, we cannot use a paired ttest\nt.test(Tooth.split.supp$OJ, Tooth.split.supp$VC)\n#Output shows that the 95% CI for the difference between the means contains 0, \n#  so we cannot be sure the two groups are different\n\nt.test(Tooth.split.dose$`0.5`, Tooth.split.dose$`1`)\nt.test(Tooth.split.dose$`1`, Tooth.split.dose$`2`)\nt.test(Tooth.split.dose$`0.5`, Tooth.split.dose$`2`)\n\n#=====================Question 4=================================================\n#State your conclusions and the assumptions needed for your conclusions. \n\n#t intervals assume that data are iid normal, though it works well whenever the \n#distribution is roughly symmetric and mound shaped - which the length variable is\n\n",
+    "created" : 1418953370670.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "34934722",
+    "id" : "5D652655",
+    "lastKnownWriteTime" : 1418956673,
+    "path" : "~/Coursera Courses/Statistical Inference/couseproj/Workingfilepart2.R",
+    "project_path" : "Workingfilepart2.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

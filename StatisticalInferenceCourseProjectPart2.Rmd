@@ -1,0 +1,64 @@
+---
+title: "Statistical Inference Course Project Part 2"
+author: "Sarah Fogel"
+date: "Thursday, December 18, 2014"
+output: word_document
+---
+
+Instructions: Now in the second portion of the class, we're going to analyze the ToothGrowth data in the R datasets package.
+
+###Part 1.    Load the ToothGrowth data and perform some basic exploratory data analyses 
+First load the data
+```{r}
+library(datasets)
+data(ToothGrowth)
+```
+Some basic exploratory analysis:
+```{r}
+dim(ToothGrowth)
+str(ToothGrowth)
+head(ToothGrowth)
+```
+
+```{r, echo=FALSE}
+library(lattice)
+bwplot(ToothGrowth$len~ToothGrowth$supp)
+bwplot(ToothGrowth$len~as.factor(ToothGrowth$dose))
+
+```
+
+###Part 2.    Provide a basic summary of the data.
+
+This data set shows the length of teeth in each of 10 guinea pigs at each of three dose levels of Vitamin C with each of two delivery methods.
+
+```{r, echo=FALSE}
+summary(ToothGrowth)
+```
+
+###Part3.    Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use the techniques from class, even if there's other approaches worth considering)
+
+First prepare to compare the growth by supp and dose by splitting the length by those variables.
+```{r}
+Tooth.split.supp<-split(ToothGrowth$len, f=ToothGrowth$supp)
+Tooth.split.dose<-split(ToothGrowth$len, f=ToothGrowth$dose)
+```
+
+Now compare the growth by supp via a t-test
+```{r}
+t.test(Tooth.split.supp$OJ, Tooth.split.supp$VC)
+```
+
+
+Next, compare the growth by dose via three t-tests
+```{r}
+t.test(Tooth.split.dose$`0.5`, Tooth.split.dose$`1`)
+t.test(Tooth.split.dose$`1`, Tooth.split.dose$`2`)
+t.test(Tooth.split.dose$`0.5`, Tooth.split.dose$`2`)
+```
+###Part 4.    State your conclusions and the assumptions needed for your conclusions. 
+
+The assumptions requred include that t intervals assume that data are iid normal, though it works well whenever the distribution is roughly symmetric and mound shaped - which the length variable is
+
+The first conclusion is that, since the 95% confidence interval for the difference in means between the supplement types includes 0, and the p-value is greater than .05, we fail to reject the null hypothesis that the means are the same.  Therefore, we cannot say that the supplement had an effect on tooth growth.
+
+For the dosages, each of the 95% confidence intervals did not contain 0, and each of the p-values was less than .05.  Therefore, we reject the null hypothesis for each case.  We can state that there was an increase in tooth length with a dose of 1 over a dose of .5, and with a dose of 2 over 1 or .5.
