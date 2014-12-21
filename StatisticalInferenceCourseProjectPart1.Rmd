@@ -2,7 +2,7 @@
 title: "Statistical Inference Course Project Part 1"
 author: "Sarah Fogel"
 date: "Thursday, December 18, 2014"
-output: word_document
+output: pdf_document
 ---
 Instructions: The exponential distribution can be simulated in R with rexp(n, lambda) where lambda is the rate parameter. The mean of exponential distribution is 1/lambda and the standard deviation is also also 1/lambda. Set lambda = 0.2 for all of the simulations. In this simulation, you will investigate the distribution of averages of 40 exponential(0.2)s. Note that you will need to do a thousand or so simulated averages of 40 exponentials.
 
@@ -27,7 +27,8 @@ The plot below shows a histogram of the means calculated above, together with th
 ```{r, echo=FALSE}
     theoretical.mean<-5
 
-    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T)
+    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T,
+         xlab="Means")
     abline(v=mean(means), lty=1, lwd=3)
     abline(v=theoretical.mean, lty=2, col="red")
     legend(legend=c("Sample Mean", "Theoret. Mean"), x="topright", lty=c(1,2),
@@ -35,7 +36,7 @@ The plot below shows a histogram of the means calculated above, together with th
 
 ```
 
-These values are, by visual inspection, quite similar
+These values are, by visual inspection, quite closely related
 
 ###Question 2: Show how variable it is and compare it to the theoretical variance of the distribution.
 
@@ -48,7 +49,8 @@ The plot below shows a comparison between the actual and theoretical values of t
     theoretical.sd<-1/(sqrt(40)*.2)
 
 
-    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T)
+    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T,
+         xlab="Means")
     abline(v=mean(means), lty=1, lwd=3)
     abline(v=theoretical.mean, lty=2, col="red")
     abline(v=mean(means)+sd(means), lty=1, lwd=3, col="purple4")
@@ -62,7 +64,7 @@ The plot below shows a comparison between the actual and theoretical values of t
 
 ```
 
-These values are, by visual inspection, quite similar
+These values are, by visual inspection, quite closely related
 
 ###Question 3: Show that the distribution is approximately normal.
 
@@ -73,7 +75,8 @@ I will use two comparisons to show that the distribution is approximately normal
     xfit<-seq(min(means), max(means), length = 40)
     yfit<-dnorm(xfit, mean=mean(means), sd=sd(means))
 
-    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T)
+    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T,
+         xlab="Means")
     lines(density(means), lwd=3)
     lines(xfit, yfit, lty=2, col="red")
     legend(legend=c("Kernal Density", "Theoret. Norm. Density"), 
@@ -95,7 +98,8 @@ Code for Plot 1
 ```{r, eval=FALSE}
      theoretical.mean<-5
 
-    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T)
+    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T,
+         xlab="Means")
     abline(v=mean(means), lty=1, lwd=3)
     abline(v=theoretical.mean, lty=2, col="red")
     legend(legend=c("Sample Mean", "Theoret. Mean"), x="topright", lty=c(1,2),
@@ -107,7 +111,8 @@ Code for Plot 2
     theoretical.sd<-1/(sqrt(40)*.2)
 
 
-    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T)
+    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T,
+         xlab="Means")
     abline(v=mean(means), lty=1, lwd=3)
     abline(v=theoretical.mean, lty=2, col="red")
     abline(v=mean(means)+sd(means), lty=1, lwd=3, col="purple4")
@@ -126,7 +131,8 @@ Code for Plot 3
     xfit<-seq(min(means), max(means), length = 40)
     yfit<-dnorm(xfit, mean=mean(means), sd=sd(means))
 
-    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T)
+    hist(means, col="steelblue", main="Means of 40 Exponential(0.2) Rand. Variates", prob=T,
+         xlab="Means")
     lines(density(means), lwd=3)
     lines(xfit, yfit, lty=2, col="red")
     legend(legend=c("Kernal Density", "Theoret. Norm. Density"), 
